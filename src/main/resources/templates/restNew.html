@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--    <script src="userInfo.js"></script>-->
+<!--    <script src="newUser.js"></script>-->
+<!--    <script type="module" src="model.js"></script>-->
+
+    <!--    <script src="editForm.js"></script>-->
+    <!--    <script src="DeleteUser.js"></script>-->
+    <!--    <script src="NewUser.js"></script>-->
+    <title>2RukinEdu</title>
+</head>
+<body>
+
+
+<!--Main container-->
+<div class="container-fluid" style="height: 100vh">
+    <div class="row bg-dark">
+        <div class="col text-white">
+            <h2 id="userInfo">
+
+            </h2>
+        </div>
+        <div class="col text-white-50">
+            <div class="p-3">
+                <h4 class="text-right">
+                    <a href="">
+                        <span class="align-middle "></span>
+                    </a>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <br>
+    </div>
+
+    <div class="row  h-100">
+        <div class="col-md-2">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a sec:authorize="hasRole('ADMIN')"
+                   class="nav-link active"
+                   id="v-pills-admin-tab" data-toggle="pill" href="#v-pills-admin" role="tab"
+                   aria-controls="v-pills-admin" aria-selected="true">Admin</a>
+
+                <a class="nav-link"
+                   th:classappend="${#authorization.expression('hasRole(''ADMIN'')') ? '' : 'active'}"
+                   id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab"
+                   aria-controls="v-pills-user" aria-selected="false"
+
+                >User</a>
+
+            </div>
+        </div>
+
+        <div class="col-md-10 bg-light ">
+            <div class="tab-content" id="v-pills-tabContent">
+
+                <div class="tab-pane fade show active" id="v-pills-admin" role="tabpanel"
+                     aria-labelledby="v-pills-admin-tab" sec:authorize="hasRole('ADMIN')">
+                    <h1>Admin Panel</h1>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="usersTable-tab" data-toggle="tab" href="#usersTable"
+                               role="tab" aria-controls="usersTable" aria-selected="true">Users Table</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="newUser-tab" data-toggle="tab" href="#newUser" role="tab"
+                               aria-controls="profile" aria-selected="false">New User</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade show active" id="usersTable" role="tabpanel"
+                             aria-labelledby="usersTable-tab">
+                            <div class="card-header"> All Users</div>
+                            <!--                            ALL USERS TABLE-->
+                            <table class="table table-striped" id="usersTable-table">
+                                <thead id="usersTable-thead">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody id="usersTable-tbody">
+                                <tr id="usersTable-tbody-tr">
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                        <div class="tab-pane fade" id="newUser" role="tabpanel" aria-labelledby="newUser-tab">
+                            <div class="card-header"> Add new User</div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade "
+                     th:classappend="${#authorization.expression('hasRole(''ADMIN'')') ? '' : 'show active'}"
+                     id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                    <!--                           USER INFO-->
+                    <h1> User Information - page</h1>
+                    <div class="card-header"><h4> About user</h4></div>
+                    <!--                            USER INFOTABLE-->
+                    <table class="table table-striped" id="aboutUser-table">
+                        <thead id="aboutUser-thead">
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                        </tr>
+                        </thead>
+                        <tbody id="aboutUser-tbody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous">
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<!--<script type="module" src="http://localhost:8081/main.js"></script>-->
+
+</body>
+</html>
