@@ -4,10 +4,12 @@ package ru.kata.spring.boot_security.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Type;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dto.UserDTO;
 
 import javax.persistence.*;
@@ -40,14 +42,30 @@ public class User implements UserDetails {
     @Column(name = "age")
     private Integer age;
 
+/*
+CascadeType.PERSIST и CascadeType.MERGE - это два разных типа каскадной операции в JPA (Java Persistence API) для управления связанными сущностями.
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+CascadeType.PERSIST используется для того, чтобы сохранить новые сущности, связанные с текущей сущностью.
+Например, если у сущности есть ассоциированные с ней сущности, которых нет в базе данных, то при сохранении
+ основной сущности эти связанные сущности будут автоматически сохранены вместе с ней.
+
+CascadeType.MERGE, с другой стороны, используется для обновления связанных сущностей,
+ если они уже существуют в базе данных. Например, если у сущности есть связанные с ней сущности,
+  которые уже находятся в базе данных и были изменены, то при обновлении основной сущности эти связанные сущности также будут обновлены.
+Таким образом, разница между CascadeType.PERSIST и CascadeType.MERGE заключается в том, что первый используется для сохранения новых сущностей,
+ а второй - для обновления уже существующих. Однако, если указаны оба каскадных типа, то все связанные сущности будут сохранены и обновлены.
+ */
+    @ManyToMany(
+            cascade = CascadeType.MERGE
+//            ,fetch = FetchType.EAGER
+
+    )
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
 
-    private List<Role> rolesSet;
+    private Set<Role> rolesSet;
 
 
     public User() {
@@ -120,6 +138,7 @@ public class User implements UserDetails {
 
     @Override
     @JsonIgnore
+    @Transactional
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = getRolesSet()
                 .stream()
@@ -162,12 +181,12 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-
-    public List<Role> getRolesSet() {
+    @Transactional
+    public Set<Role> getRolesSet() {
         return rolesSet;
     }
 
-    public void setRolesSet(List<Role> rolesSet) {
+    public void setRolesSet(Set<Role> rolesSet) {
         this.rolesSet = rolesSet;
     }
 

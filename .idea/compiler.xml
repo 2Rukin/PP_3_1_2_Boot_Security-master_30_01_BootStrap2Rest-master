@@ -18,7 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="PP_3_1_2_Boot_Security-master_30_01_BootStrap2" options="-parameters" />
       <module name="PP_3_1_2_Boot_Security-master_30_01_BootStrap2Rest" options="-parameters" />
-      <module name="PP_3_1_2_Boot_Security-master_30_01_BootStrap2Rest-master" options="" />
+      <module name="PP_3_1_2_Boot_Security-master_30_01_BootStrap2Rest-master" options="-parameters" />
       <module name="PP_3_1_2_Boot_Security-master_30_01_BootStrap2Rest28" options="-parameters" />
       <module name="spring-boot_security-demo" options="-parameters" />
     </option>

@@ -1,0 +1,90 @@
+<section th:fragment="editForm">
+
+    <form class="modal-body col" id="editForm" style="max-width: 300px;">
+
+        <div class="mb-3">
+            <label for="edit-id"
+                   class="col-form-label d-flex justify-content-center"><b>ID</b>:</label>
+            <input disabled type="text"
+                   class="form-control"
+                   id="edit-id"
+                   name="id">
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-userName"
+                   class="col-form-label d-flex justify-content-center"><b>First
+                name</b>:</label>
+            <input type="text"
+                   class="form-control"
+                   id="edit-userName"
+                   name="userName">
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-lastName"
+                   class="col-form-label d-flex justify-content-center"><b>Last
+                name</b>:</label>
+            <input type="text"
+                   class="form-control"
+                   id="edit-lastName"
+                   name="lastName">
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-age"
+                   class="col-form-label d-flex justify-content-center"><b>Age</b>:</label>
+            <input type="number"
+                   class="form-control"
+                   id="edit-age"
+                   name="age">
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-email"
+                   class="col-form-label d-flex justify-content-center"><b>Email</b>:</label>
+            <input type="email"
+                   class="form-control"
+                   id="edit-email"
+                   name="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-password"
+                   class="col-form-label d-flex justify-content-center"><b>Password</b>:</label>
+            <input type="password"
+                   class="form-control"
+                   id="edit-password"
+                   name="password" value="">
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-role"
+                   class="col-form-label d-flex justify-content-center"><b>Role</b>:</label>
+            <select name="rolesSet" id="edit-role" class="form-control custom-select" size="6"
+                    required
+
+                    multiple>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        console.log("мы в бутсрап модальном окне")
+                        let rolesSet = $("#edit-role");
+                        $.get("/api/roles", function (data) {
+
+                            data.forEach(role => {
+                                rolesSet.append('<option value="'+ role.id +  '" id= "' + role.roleName + '">' + role.roleNameNoPrefix + '</option>');
+                                console.log(role.roleNameNoPrefix)
+                            });
+                        })
+                    })
+                </script>
+            </select>
+        </div>
+
+    </form>
+
+
+
+
+
+</section>

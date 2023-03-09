@@ -19,17 +19,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+/*
+Разница заключается в области применения.
 
+Причина, по которой объединение коллекций становится ленивым, заключается в том, чтобы не загружать коллекцию каждый
+ раз при загрузке родительского объекта, если вам это действительно не нужно.
+Если вы обычно загружаете коллекцию с задержкой, но для определенного использования вам необходимо убедиться, что
+коллекция была загружена до закрытия сеанса, вы можете использоватьHibernate.initialize(Object obj), как вы отметили.
+Если вам на самом деле всегда нужна загруженная коллекция, вам действительно следует загружать ее с нетерпением.
+Однако в большинстве программ это не так.
+ */
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByEmail(username);
-//        Hibernate.initialize(user.getRolesSet());
-        System.out.println(user.getRolesSet());
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User" + user + " not found");
-        }
+        Hibernate.initialize(user.getRolesSet());
 
         return user;
     }

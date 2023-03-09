@@ -1,0 +1,3 @@
+FROM adoptopenjdk/openjdk17:jre-11.0.12_7-alpine
+COPY target/myapp.jar /myapp.jar
+ENTRYPOINT ["java", "-jar", "/myapp.jar"]

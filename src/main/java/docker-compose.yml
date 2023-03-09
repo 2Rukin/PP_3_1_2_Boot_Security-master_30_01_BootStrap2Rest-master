@@ -10,7 +10,7 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
     ports:
-      - "3306:3307"
+      - "3308:3306" # изменение порта MySQL на 3308
     volumes:
       - ./data:/var/lib/mysql
 
@@ -18,4 +18,4 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8085:8085
+      - "8083:8083" # изменение порта Adminer на 8086

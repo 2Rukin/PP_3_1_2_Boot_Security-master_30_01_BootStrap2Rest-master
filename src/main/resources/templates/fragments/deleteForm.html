@@ -1,0 +1,66 @@
+<section th:fragment="deleteForm">
+
+    <form class="modal-body col" id="deleteForm" style="max-width: 300px;">
+
+        <div class="mb-3">
+            <label for="delete-id"
+                   class="col-form-label d-flex justify-content-center"><b>ID</b>:</label>
+            <input disabled type="text"
+                   class="form-control"
+                   id="delete-id"
+                   name="id" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="delete-userName"
+                   class="col-form-label d-flex justify-content-center"><b>First
+                name</b>:</label>
+            <input type="text"
+                   class="form-control"
+                   id="delete-userName"
+                   name="userName" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="delete-lastName"
+                   class="col-form-label d-flex justify-content-center"><b>Last
+                name</b>:</label>
+            <input type="text"
+                   class="form-control"
+                   id="delete-lastName"
+                   name="lastName" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="delete-age"
+                   class="col-form-label d-flex justify-content-center"><b>Age</b>:</label>
+            <input type="number"
+                   class="form-control"
+                   id="delete-age"
+                   name="age" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="delete-email"
+                   class="col-form-label d-flex justify-content-center"><b>Email</b>:</label>
+            <input type="email"
+                   class="form-control"
+                   id="delete-email"
+                   name="email" readonly>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="delete-role"
+                   class="col-form-label d-flex justify-content-center"><b>Role</b>:</label>
+            <select name="roles" id="delete-role" class="form-control custom-select" size="6"
+                    required
+                    disabled
+                    multiple>
+            </select>
+        </div>
+
+    </form>
+
+
+</section>

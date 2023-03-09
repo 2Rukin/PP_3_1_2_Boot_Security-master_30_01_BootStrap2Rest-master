@@ -1,0 +1,62 @@
+<section th:fragment="editModal">
+    <div class="modal fade align-items-center" tabindex="-1" id="editModal" aria-hidden="true" >
+<!--         data-bs-backdrop="true"-->
+<!--         style="z-index: 1050; "-->
+
+
+        <div class="modal-dialog ">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User</h5>
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                </div>
+
+                <div class="modal-body">
+                    <div class="bg-white font-weight-bold">
+                        <div class="d-flex justify-content-center align-items-center text-center">
+                            <section th:replace="fragments/editForm.html"></section>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="editClose"
+                            onclick="editModalWindow.hide()" >Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="editBtn" onclick="updateUser()">Edit</button>
+                </div>
+<!--                <script type="text/javascript">-->
+<!--                    $(document).ready(function () {-->
+<!--                        console.log("навешаем клик на editbutton")-->
+<!--                       // let user = getDataFromForm()-->
+<!--                        console.log(user)-->
+
+<!--                        $("#editBtn").on("click", function () {-->
+<!--                            $.ajax({-->
+<!--                                url: "/api/users/",-->
+<!--                                dataType: 'json',-->
+<!--                                type: "PUT",-->
+<!--                                cache: false,-->
+<!--                                contentType: 'application/json',-->
+<!--                                data: user-->
+
+<!--                            })-->
+<!--                                .done(function () {-->
+<!--                                    console.log("User info updated");-->
+<!--                                })-->
+<!--                                .fail(function () {-->
+<!--                                    console.log("Error updating user info");-->
+<!--                                });-->
+
+<!--                        })-->
+<!--                    })-->
+
+<!--                </script>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+

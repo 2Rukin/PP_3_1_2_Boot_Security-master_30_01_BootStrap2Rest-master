@@ -1,0 +1,46 @@
+<section th:fragment="userInfoTable">
+    <div>
+        <table class="table table-striped" id="aboutUser-table">
+            <thead id="aboutUser-thead">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Roles</th>
+            </tr>
+            </thead>
+            <tbody id="aboutUser-tbody">
+
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        let userInfo = document.querySelector('#userInfo')
+
+
+        function showUserPage() {
+            let userTable = document.querySelector('#aboutUser-tbody')
+            fetch("http://localhost:8085/api/users/current")
+                .then(res => res.json())
+                .then(user => {
+                    userInfo.innerHTML = `
+                                <span class="font-weight-bold">${user.email}</span>
+                                with roles:
+                                ${user.rolesSet.map(r => ' ' + r.roleNameNoPrefix)}
+                                 `;
+                    userTable.innerHTML = `
+                                <td>${user.id}</td>
+                                <td>${user.userName}</td>
+                                <td>${user.lastName}</td>
+                                <td>${user.age}</td>
+                                <td>${user.email}</td>
+                                <td> ${user.rolesSet.map(r => ' ' + r.roleNameNoPrefix)}</td>
+                                 `
+                })
+        }
+        showUserPage();
+
+    </script>
+</section>

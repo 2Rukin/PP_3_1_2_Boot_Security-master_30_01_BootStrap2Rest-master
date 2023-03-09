@@ -1,0 +1,67 @@
+<section th:fragment="newUser-formContent">
+    <!--                          NEW USER FORM-->
+    <form id="newUser-form">
+
+        <div class="form-group">
+            <label for="inputUserName"
+                   class="row font-weight-bold justify-content-center">First
+                Name</label>
+            <input type="text" class="form-control" name="userName" id="inputUserName">
+        </div>
+
+        <div class="form-group">
+            <label for="inputLastName"
+                   class="row font-weight-bold justify-content-center">Last
+                Name</label>
+            <input type="text" class="form-control" id="inputLastName">
+
+        </div>
+
+        <div class="form-group">
+            <label for="inputAge"
+                   class="row font-weight-bold justify-content-center">Age</label>
+            <input type="number" class="form-control" name="age" id="inputAge">
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail"
+                   class="row font-weight-bold justify-content-center">Email</label>
+            <input type="email" class="form-control" name="email" id="inputEmail">
+
+        </div>
+
+        <div class="form-group">
+            <label for="InpPassword"
+                   class="row font-weight-bold justify-content-center">Password</label>
+            <input type="password" class="form-control" name="password" id="inpPassword">
+
+        </div>
+
+        <div class="form-group">
+            <label for="rolesSet-newUser"
+                   class="row font-weight-bold justify-content-center">Role</label>
+            <select class="form-control" multiple id="rolesSet-newUser">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        console.log("мы в бутсрап модальном окне")
+                        let rolesSet = $("#rolesSet-newUser");
+                        $.get("/api/roles", function (data) {
+
+                            data.forEach(role => {
+                                rolesSet.append('<option value="'+ role.id +  '" id= "' + role.roleName + '">' + role.roleNameNoPrefix + '</option>');
+                                console.log(role.roleNameNoPrefix)
+                            });
+                        })
+                    })
+                </script>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-success" id="addNewUser-btn"
+                    value="Add new user">
+                Add new user
+            </button>
+        </div>
+    </form>
+</section>

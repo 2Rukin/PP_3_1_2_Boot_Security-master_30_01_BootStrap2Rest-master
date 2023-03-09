@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,9 +20,9 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "rolename")
     private String roleName;
-//    @JsonIgnore
-//    @ManyToMany(mappedBy = "rolesSet")
-//    private Set<User> usersSet = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "rolesSet")
+    private Set<User> usersSet = new HashSet<>();
 
 
     public Role() {
@@ -29,10 +30,10 @@ public class Role implements GrantedAuthority {
     public Role(String roleName) {
         this.roleName = roleName;
     }
-//    public Role(String roleName, Set<User> usersSet) {
-//        this.roleName = roleName;
-////        this.usersSet = usersSet;
-//    }
+    public Role(String roleName, Set<User> usersSet) {
+        this.roleName = roleName;
+        this.usersSet = usersSet;
+    }
 
     public Role(Long id, String roleName) {
         this.id = id;
@@ -49,7 +50,7 @@ public class Role implements GrantedAuthority {
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", roleName='" + roleName +
+//                ", roleName='" + roleName +
                 '}';
     }
 

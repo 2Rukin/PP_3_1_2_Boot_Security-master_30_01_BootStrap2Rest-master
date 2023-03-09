@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void addUser(User user) {
+
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -82,13 +83,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(int id) {
         userRepository.deleteById(id);
-
-    }
-
-
-    @Transactional
-    public User findUserById(int id) {
-        return (User) userRepository.findUserById(id);
 
     }
 

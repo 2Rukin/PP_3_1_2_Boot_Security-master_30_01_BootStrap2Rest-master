@@ -47,9 +47,9 @@ public class UserRestController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/{email}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable String email) {
-        UserDTO user =new UserDTO(userService.findUserByEmail(email));
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
+        UserDTO user =new UserDTO(userService.getUserById(id));
 
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -59,19 +59,20 @@ public class UserRestController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
-        userService.addUser(new User(user));
-
-        User responseUser = userService.findUserByEmail(user.getEmail());// Создаем чтобы вернуть юзера
-        return ResponseEntity.ok(new UserDTO(responseUser));
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        userService.addUser(user);
+        UserDTO userDTO = new UserDTO(user);
+        userDTO.setPassword("");
+        return ResponseEntity.ok(new User(userDTO));
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PatchMapping
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDto) {
-        User user = new User(userDto);
+    @PutMapping
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+
         userService.updateUser(user);
-        return ResponseEntity.ok(new UserDTO(user));
+
+        return ResponseEntity.ok(user);
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
