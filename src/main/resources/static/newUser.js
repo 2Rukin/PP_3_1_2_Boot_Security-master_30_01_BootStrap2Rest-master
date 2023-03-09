@@ -1,7 +1,7 @@
 $(document).ready(function () {
    // заполняем селектор ролей
     getRoles(function (roles) {
-        let rolesSet = $("#rolesSet");
+        let rolesSet = $("#rolesSet-newUser");
         roles.forEach(role => {
             rolesSet.append('<option value="'+ role.id +  '" id= "' + role.roleName + '">' + role.roleNameNoPrefix + '</option>');
 
@@ -12,7 +12,7 @@ $(document).ready(function () {
     let button = document.querySelector("#addNewUser-btn");
     button.addEventListener("click", function () {
 
-        let selectedRoles = $("#rolesSet option:selected").map(function () {
+        let selectedRoles = $("#rolesSet-newUser option:selected").map(function () {
 
               // Создаем объект с двумя свойствами id;
             return {

@@ -41,19 +41,19 @@
             <label for="rolesSet-newUser"
                    class="row font-weight-bold justify-content-center">Role</label>
             <select class="form-control" multiple id="rolesSet-newUser">
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        console.log("мы в бутсрап модальном окне")
-                        let rolesSet = $("#rolesSet-newUser");
-                        $.get("/api/roles", function (data) {
+<!--                <script type="text/javascript">-->
+<!--                    $(document).ready(function () {-->
+<!--                        console.log("мы в бутсрап модальном окне")-->
+<!--                        let rolesSet = $("#rolesSet-newUser");-->
+<!--                        $.get("/api/roles", function (data) {-->
 
-                            data.forEach(role => {
-                                rolesSet.append('<option value="'+ role.id +  '" id= "' + role.roleName + '">' + role.roleNameNoPrefix + '</option>');
-                                console.log(role.roleNameNoPrefix)
-                            });
-                        })
-                    })
-                </script>
+<!--                            data.forEach(role => {-->
+<!--                                rolesSet.append('<option value="'+ role.id +  '" id= "' + role.roleName + '">' + role.roleNameNoPrefix + '</option>');-->
+<!--                                console.log(role.roleNameNoPrefix)-->
+<!--                            });-->
+<!--                        })-->
+<!--                    })-->
+<!--                </script>-->
             </select>
         </div>
 
